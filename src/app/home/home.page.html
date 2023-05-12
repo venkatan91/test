@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <h1 class="font-weight-600">Sample App with ion- datetime component</h1>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form (ngSubmit)="submitForm()">
+    <ion-item>
+      <ion-label>Select a date from future</ion-label>
+  
+      <ion-input placeholder="Select Date" id="date" name="selecteddate" value="{{selectedDate | date: 'MM/dd/yyyy'}}"></ion-input>
+      <ion-modal trigger="date">
+        <ion-content>
+          <ng-template>
+            <ion-datetime presentation="date" name="selectdate" showDefaultButtons="true" [(ngModel)]="selectedDate" [min]="minDate" [max]="maxDate"></ion-datetime>
+        </ng-template>
+        </ion-content>
+      </ion-modal>
+
+    </ion-item>
+    <ion-button expand="block" type="submit">Submit</ion-button>
+  </form>
+ <ion-list style="border: 5px solid red;" *ngIf="submitted">
+    <ion-item>
+      <ion-label style="font-weight: bold;">Today:</ion-label>
+      <ion-note style="font-style: italic;">{{ today | date: 'MM/dd/yyyy'}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label style="font-weight: bold;">Yesterday:</ion-label>
+      <ion-note style="font-style: italic;">{{ yesterday | date: 'MM/dd/yyyy'}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label style="font-weight: bold;">10 days past selected date:</ion-label>
+      <ion-note style="font-style: italic;">{{ tenDaysAgo | date: 'MM/dd/yyyy'}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label style="font-weight: bold;">1 year past selected date:</ion-label>
+      <ion-note style="font-style: italic;">{{ oneYearAgo | date: 'MM/dd/yyyy'}}</ion-note>
+    </ion-item>
+    
+  </ion-list>
+</ion-content>
